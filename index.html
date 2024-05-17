@@ -53,7 +53,31 @@
 
 <script>
 
-function runUnitTests() {
+  function runUnitTests() {
+
+      var repoName = "PubInv/nano-cap-table";
+      var fileName = "cap_table.json";
+  //    var baseURL = "https://github.com";
+      var baseURL = "http://127.0.0.1:8080/";
+
+        // This worked...
+      //    var url = `${baseURL}/${repoName}/${fileName}`;
+      var url = `${baseURL}/${fileName}`;
+    fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.text();
+  })
+  .then(data => {
+    console.log(data); // Do something with the content of the file
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+
+
     console.log($('#shares').val());
     console.log($('#person').val());
   };
