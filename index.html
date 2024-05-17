@@ -1,1 +1,61 @@
-<h1> Hello, World! </h1>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Nano Cap Table </title>
+    <meta name="description" content="Nan Cap Table">
+    <meta name="author" content="Robert L. Read and Prajwal Shah">
+    <link rel="stylesheet" href="./jquery-ui-1.13.2.custom/jquery-ui.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="icon" href="./images/favicon.ico">
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+
+</head>
+<script>
+  </script>
+<body>
+
+
+
+<h1> Nano Cap Table </h1>
+
+<p> A work-in-progress lightweight system for keeping a cap table
+</p>
+
+<div>Give shares to a person:<div>
+    <div>
+      Shares: <input type=text id="shares"></input>
+    </div>
+    <div>
+      Person: <input type=text id="person"></input>
+      <div>
+
+    <p>
+      <button type="button" onclick="runUnitTests()">
+        Execute Tests!</button>
+    </p>
+
+<p> This is a test of our ability to read S3 buckets:
+  <div id="viewer"></div>
+</p>
+
+    <h2>Licensing</h2>
+
+    <img src="https://www.gnu.org/graphics/agplv3-with-text-162x68.png"></img>
+
+    <p>All of the code on this site is released under the <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License Version 2</a>, and I hope you will
+      reuse it. The code, including technical documentation, can be found <a href="https://github.com/PubInv/segmented-helixes">in the repo</a>.</p>
+    <p>To assist on this project, contact Robert L. Read &lt; read.robert@gmail.com &gt;</p>
+</body>
+
+<script>
+
+function runUnitTests() {
+    console.log($('#shares').val());
+    console.log($('#person').val());
+  };
+
+</script>
