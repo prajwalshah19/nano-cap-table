@@ -3,6 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>Nano Cap Table </title>
+    <style>
+      .form-container {
+          margin-top: 20px;
+          display: none;
+      }
+  </style>
+
     <meta name="description" content="Nan Cap Table">
     <meta name="author" content="Robert L. Read and Prajwal Shah">
     <link rel="stylesheet" href="./jquery-ui-1.13.2.custom/jquery-ui.min.css">
@@ -21,7 +28,40 @@
 
 
 <h1> Nano Cap Table </h1>
+<div>
+  <p>Cap Table Initial Test</p>
+  <h1>Cap Table</h1>
+  <table id="table">
+      <thead>
+          <tr>
+              <th>Timestamp</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Shares</th>
+              <th>Ownership</th>
+          </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
+  <pre id="json-data"></pre>
+  <button onclick="showForm('insert')">Insert Entry</button>
+  <button onclick="showForm('edit')">Edit Entry</button>
+  <button onclick="showForm('delete')">Delete Entry</button>
+  <button onclick="saveToGitHub()">Save to GitHub</button>
 
+  <div id="form-container" class="form-container">
+      <form id="entry-form" onsubmit="handleSubmit(event)">
+          <div id="form-fields">
+              <!-- Form fields will be inserted here -->
+          </div>
+          <button type="submit">Submit</button>
+          <button type="button" onclick="hideForm()">Cancel</button>
+      </form>
+  </div>
+  <script src="server.js"></script>
+  <script src="cap_table.js"></script>
+
+</div>
 <p> A work-in-progress lightweight system for keeping a cap table
 </p>
 
@@ -51,7 +91,55 @@
     <p>To assist on this project, contact Robert L. Read &lt; read.robert@gmail.com &gt;</p>
 </body>
 
+
 <script>
+        let capTable = NanoCapTable.loadFromLocalStorage();
+
+function showForm(action) {
+    const formContainer = document.getElementById('form-container');
+    const formFields = document.getElementById('form-fields');
+    formFields.innerHTML = '';
+
+    let fields = '';
+    if (action === 'insert' || action === 'edit') {
+        fields += '<label for="name">Name:</label><input type="text" id="name" required><br>';
+        fields += '<label for="username">Username:</label><input type="text" id="username" required><br>';
+        fields += '<label for="shares">Shares:</label><input type="number" id="shares" required><br>';
+    } else if (action === 'delete') {
+        fields += '<label for="username">Username:</label><input type="text" id="username" required><br>';
+    }
+
+    formFields.innerHTML = fields;
+    formContainer.style.display = 'block';
+    formContainer.dataset.action = action;
+}
+
+function hideForm() {
+    const formContainer = document.getElementById('form-container');
+    formContainer.style.display = 'none';
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    const action = document.getElementById('form-container').dataset.action;
+    const name = document.getElementById('name') ? document.getElementById('name').value : null;
+    const username = document.getElementById('username').value;
+    const shares = document.getElementById('shares') ? parseInt(document.getElementById('shares').value, 10) : null;
+
+    if (action === 'insert') {
+        capTable.add(name, username, shares);
+    } else if (action === 'edit') {
+        capTable.edit(username, shares);
+    } else if (action === 'delete') {
+        capTable.delete(username);
+    }
+
+    hideForm();
+    capTable.renderTable();
+}
+
+// Initial render
+capTable.renderTable();
 
   function runUnitTests() {
 

@@ -1,2 +1,23 @@
-[ { "x" : "4" }
+{
+    "name": "Example Cap Table",
+    "dateCreated": "2024-01-01T00:00:00.000Z",
+    "totalShares": 2500,
+    "table": [
+      {
+        "timestamp": "2024-01-01T12:00:00.000Z",
+        "name": "Prajwal Shah",
+        "username": "pshah",
+        "shares": 1000,
+        "ownership": 0.4
+      },
+      {
+        "timestamp": "2024-01-02T15:30:00.000Z",
+        "name": "Robert Read",
+        "username": "rread",
+        "shares": 1500,
+        "ownership": 0.6
+      }
+    ]
+  }
   
+    
