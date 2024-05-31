@@ -8,12 +8,13 @@ const GITHUB_TOKEN = '';
 // Fetch cap_table.json from GitHub
 async function fetchFromGitHub() {
     try {
-        const response = await fetch(`${GITHUB_API_URL}/${GITHUB_REPO}/blob/main/${GITHUB_FILE_PATH}`, {
-            headers: {
-                'Authorization': `token ${GITHUB_TOKEN}`,
-                'Accept': 'application/vnd.github.v3.raw'
-            }
-        });
+        // Assuming GITHUB_FILE_URL directly points to the raw user content URL of the file in the GitHub repository
+        const GITHUB_FILE_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${GITHUB_FILE_PATH}`;
+        
+        const response = await fetch(GITHUB_FILE_URL);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.text();
         localStorage.setItem('capTable', data);
         const capTable = NanoCapTable.loadFromLocalStorage();
@@ -30,6 +31,10 @@ async function saveToGitHub() {
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(capTable))));
     const message = 'Update cap table';
 
+    if (GITHUB_TOKEN === '') {
+        //alert('Token Invalid')
+        GITHUB_TOKEN = window.prompt('Enter a valid github token here')
+    }
     try {
         const response = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`, {
             headers: {
