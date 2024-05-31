@@ -3,7 +3,6 @@
 const GITHUB_API_URL = 'https://github.com';
 const GITHUB_REPO = 'PubInv/nano-cap-table';
 const GITHUB_FILE_PATH = 'cap_table.json';
-const GITHUB_TOKEN = '';
 
 // Fetch cap_table.json from GitHub
 async function fetchFromGitHub() {
@@ -30,7 +29,7 @@ async function saveToGitHub() {
     const capTable = NanoCapTable.loadFromLocalStorage();
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(capTable))));
     const message = 'Update cap table';
-
+    let GITHUB_TOKEN = ''
     if (GITHUB_TOKEN === '') {
         //alert('Token Invalid')
         GITHUB_TOKEN = window.prompt('Enter a valid github token here')
@@ -57,8 +56,9 @@ async function saveToGitHub() {
                 sha: sha,
             }, null, 2)
         });
-        console.log('File updated successfully');
+        alert('File updated successfully');
     } catch (error) {
-        console.error('Error saving to GitHub:', error);
+        console.log(error)
+        alert('Error saving to GitHub:', error);
     }
 }
