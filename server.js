@@ -1,6 +1,6 @@
 // Not a traditional server, these functions just provide a way to save current session to github
 
-const GITHUB_API_URL = 'https://github.com';
+const GITHUB_API_URL = 'https://api.github.com';
 const GITHUB_REPO = 'PubInv/nano-cap-table';
 const GITHUB_FILE_PATH = 'cap_table.json';
 
