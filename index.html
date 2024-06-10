@@ -31,7 +31,7 @@
             background-color: #f0f0f0;
             color: #636363;
             text-align: center;
-            padding: 10px 0;
+            padding: 10px 5px 5px 0;
         }
         .json-output {
             position: relative;
@@ -51,13 +51,11 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="display-4">Nano Cap Table</h1>
+        <h1 id = "pageTitle" class="display-4">Nano Cap Table</h1>
         <p class="lead">A lightweight accounting of a capital table needed to create a simple joint stock company.</p>
-
+        <p>Repository: <a id="repoLink" href="#" target="_blank">GitHub Repository</a></p>
         <div class="mb-3">
             <button class="btn btn-primary" onclick="showForm('insert')">Insert Entry</button>
-            <button class="btn btn-secondary" onclick="showForm('edit')">Edit Entry</button>
-            <button class="btn btn-danger" onclick="showForm('delete')">Delete Entry</button>
             <button class="btn btn-success" onclick="saveToGitHub()">Save to GitHub</button>
         </div>
 

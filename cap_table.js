@@ -1,3 +1,4 @@
+
 // Constructor
 function NanoCapTable(name) {
     this.name = name;
@@ -112,10 +113,13 @@ NanoCapTable.loadFromLocalStorage = function() {
         capTable.dateCreated = new Date(obj.dateCreated);
         capTable.table = obj.table;
         capTable.renderTable();
+        updatePageDetails(capTable.name);
         return capTable;
     }
     return new NanoCapTable("Example Table");
 }
+
+
 
 // Initialize and load data from GitHub
 fetchFromGitHub();

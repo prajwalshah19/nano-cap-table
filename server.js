@@ -4,6 +4,14 @@ const GITHUB_API_URL = 'https://api.github.com';
 const GITHUB_REPO = 'PubInv/nano-cap-table';
 const GITHUB_FILE_PATH = 'cap_table.json';
 
+// Update page details function that sets repository link and table name
+function updatePageDetails(name) {
+    document.getElementById('pageTitle').textContent = name + " - Nano Cap Table";
+    document.getElementById('tableName').textContent = name;
+    document.getElementById('repoLink').setAttribute('href', `https://github.com/${GITHUB_REPO}`);
+    document.getElementById('repoLink').textContent = `Visit ${name}`;
+}
+
 // Fetch cap_table.json from GitHub
 async function fetchFromGitHub() {
     try {
@@ -18,6 +26,8 @@ async function fetchFromGitHub() {
         localStorage.setItem('capTable', data);
         const capTable = NanoCapTable.loadFromLocalStorage();
         capTable.renderTable();
+        console.log(capTable)
+        updatePageDetails(capTable.name);
         return capTable;
     } catch (error) {
         console.error('Error fetching from GitHub:', error);
