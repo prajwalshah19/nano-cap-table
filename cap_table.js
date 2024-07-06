@@ -113,7 +113,7 @@ NanoCapTable.loadFromLocalStorage = function() {
         capTable.dateCreated = new Date(obj.dateCreated);
         capTable.table = obj.table;
         capTable.renderTable();
-        updatePageDetails(capTable.name);
+        //updatePageDetails(capTable.name);
         return capTable;
     }
     return new NanoCapTable("Example Table");

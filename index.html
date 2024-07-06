@@ -98,13 +98,10 @@
             formFields.innerHTML = '';
 
             let fields = '';
-            if (action === 'insert' || action === 'edit') {
-                fields += '<div class="form-group"><label for="name">Name:</label><input type="text" class="form-control" id="name" required></div>';
-                fields += '<div class="form-group"><label for="username">Username:</label><input type="text" class="form-control" id="username" required></div>';
-                fields += '<div class="form-group"><label for="shares">Shares:</label><input type="number" class="form-control" id="shares" required></div>';
-            } else if (action === 'delete') {
-                fields += '<div class="form-group"><label for="username">Username:</label><input type="text" class="form-control" id="username" required></div>';
-            }
+            fields += '<div class="form-group"><label for="name">Name:</label><input type="text" class="form-control" id="name" required></div>';
+            fields += '<div class="form-group"><label for="username">Username:</label><input type="text" class="form-control" id="username" required></div>';
+            fields += '<div class="form-group"><label for="shares">Shares:</label><input type="number" class="form-control" id="shares" required></div>';
+
 
             formFields.innerHTML = fields;
             formContainer.style.display = 'block';
@@ -125,11 +122,7 @@
 
             if (action === 'insert') {
                 capTable.add(name, username, shares);
-            } else if (action === 'edit') {
-                capTable.edit(username, shares);
-            } else if (action === 'delete') {
-                capTable.delete(username);
-            }
+            } 
 
             hideForm();
             capTable.renderTable();

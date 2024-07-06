@@ -27,7 +27,7 @@ async function fetchFromGitHub() {
         const capTable = NanoCapTable.loadFromLocalStorage();
         capTable.renderTable();
         console.log(capTable)
-        updatePageDetails(capTable.name);
+        //updatePageDetails(capTable.name);
         return capTable;
     } catch (error) {
         console.error('Error fetching from GitHub:', error);
