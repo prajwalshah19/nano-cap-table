@@ -94,7 +94,7 @@
         let capTable; // this is of typoe NanoCapTable
  //       = NanoCapTable.loadFromLocalStorage();
         capTablePromise = fetchFromGitHub();
-        capTable.then((value) => {
+        capTablePromise.then((value) => {
               console.log(value);
                 capTable = value;
                 value.renderTable();
