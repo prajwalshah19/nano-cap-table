@@ -93,7 +93,7 @@
     <script>
         let capTable; // this is of typoe NanoCapTable
  //       = NanoCapTable.loadFromLocalStorage();
-        capTable = fetchFromGitHub();
+        capTable = await fetchFromGitHub();
         console.log("The next object had bette be a NanoCapTable");
         console.log(capTable);
         function showForm(action) {
