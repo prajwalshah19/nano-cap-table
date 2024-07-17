@@ -91,10 +91,11 @@
     <script src="server.js"></script>
     <script src="cap_table.js"></script>
     <script>
-        let capTable; // this is of typoe capTable
+        let capTable; // this is of typoe NanoCapTable
  //       = NanoCapTable.loadFromLocalStorage();
         capTable = fetchFromGitHub();
-        console.log(capTable)
+        console.log("The next object had bette be a NanoCapTable");
+        console.log(capTable);
         function showForm(action) {
             const formContainer = document.getElementById('form-container');
             const formFields = document.getElementById('form-fields');
