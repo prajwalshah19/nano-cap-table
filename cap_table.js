@@ -35,7 +35,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     // Push new entry
     this.table.push({"timestamp": timestamp, "name": name, "username": username, "shares": shares});
 
-    this.saveToLocalStorage();
+//    this.saveToLocalStorage();
     this.renderTable();
 
     return true;
@@ -71,6 +71,7 @@ NanoCapTable.prototype.renderTable = function() {
     document.getElementById("json-data").textContent = JSON.stringify(this, null, 2);
 }
 
+/*
 // Save to local storage
 NanoCapTable.prototype.saveToLocalStorage = function() {
     localStorage.setItem('capTable', JSON.stringify(this));
@@ -90,6 +91,6 @@ NanoCapTable.loadFromLocalStorage = function() {
     }
     return new NanoCapTable("Example Table");
 }
-
+*/
 
 fetchFromGitHub()
