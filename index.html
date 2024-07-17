@@ -91,7 +91,9 @@
     <script src="server.js"></script>
     <script src="cap_table.js"></script>
     <script>
-        let capTable = NanoCapTable.loadFromLocalStorage();
+        let capTable; // this is of typoe capTable
+ //       = NanoCapTable.loadFromLocalStorage();
+        capTable = fetchFromGitHub();
         console.log(capTable)
         function showForm(action) {
             const formContainer = document.getElementById('form-container');
