@@ -56,7 +56,7 @@
         <p>Repository: <a id="repoLink" href="#" target="_blank">GitHub Repository</a></p>
         <div class="mb-3">
             <button class="btn btn-primary" onclick="showForm('insert')">Insert Entry</button>
-            <button class="btn btn-success" onclick="saveToGitHub()">Save to GitHub</button>
+            <button class="btn btn-success" onclick="persistCapTable()">Save to GitHub</button>
         </div>
 
         <table class="table table-striped" id="table">
@@ -96,6 +96,9 @@
         capTable = fetchFromGitHub();
         console.log("The next object had bette be a NanoCapTable");
         console.log(capTable);
+        function perstistCapTable() {
+            saveToGitHub(capTable);
+        }
         function showForm(action) {
             const formContainer = document.getElementById('form-container');
             const formFields = document.getElementById('form-fields');
