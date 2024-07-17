@@ -2,7 +2,8 @@
 // Constructor
 function NanoCapTable(name) {
     this.name = name;
-    this.dateCreated = new Date();
+ //   this.dateCreated = new Date(); // Create new date only if brand new cap_table. Represents date of first entry.
+    // May have to change constructor to accomplish that.
     this.table = [];
 }
 
@@ -15,6 +16,7 @@ Object.defineProperty(NanoCapTable.prototype, 'totalShares', {
 
 // Add Entry
 NanoCapTable.prototype.add = function(name, username, shares) {
+
     if (shares <= 0) {
         alert("Please Enter a valid share number");
         return false;
@@ -27,6 +29,8 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     }
 
     let timestamp = new Date();
+    
+    // Could check to see if the table is empty, and if so, add created_date.
 
     // Push new entry
     this.table.push({"timestamp": timestamp, "name": name, "username": username, "shares": shares});
