@@ -8,6 +8,12 @@ NanoCaptable is an innovative, open-source tool designed to facilitate the equit
 
 The early stages of project development, particularly within the realms of computer science, economics, and accounting, often necessitate the allocation of equity among contributors. However, the uncertainty surrounding the project's success may not justify the creation of a formal legal entity. NanoCaptable addresses this gap by providing an accessible, open-source solution that enables the creation and management of equity cap tables. This tool allows for the fair and transparent distribution of ownership stakes, fostering trust and cooperation among team members.
 
+The running example can be seen here:
+
+[https://pubinv.github.io/nano-cap-table/](https://pubinv.github.io/nano-cap-table/)
+
+(You will not be able to change the table unless you have a github access token to the repo which is serving the github pages.
+
 ## Features
 
 ### Lightweight and Backend-Free
