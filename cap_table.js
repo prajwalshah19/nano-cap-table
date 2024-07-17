@@ -13,39 +13,6 @@ Object.defineProperty(NanoCapTable.prototype, 'totalShares', {
     }
 });
 
-// Delete Entry by username
-NanoCapTable.prototype.delete = function(username) {
-    const index = this.table.findIndex(entry => entry.username === username);
-    if (index !== -1) {
-        this.table.splice(index, 1);
-        this.saveToLocalStorage();
-        this.renderTable();
-        alert('Entry deleted successfully.');
-        return true;
-    } else {
-        alert("Username not found.");
-        return false;
-    }
-};
-
-// Edit Entry
-NanoCapTable.prototype.edit = function(username, newName, newShares) {
-    const index = this.table.findIndex(entry => entry.username === username);
-    if (index === -1) {
-        alert("Username doesn't exist.");
-        return false;
-    }
-
-    // Update details
-    this.table[index].name = newName;
-    this.table[index].shares = newShares;
-
-    this.saveToLocalStorage();
-    this.renderTable();
-    alert('Entry updated successfully.');
-    return true;
-};
-
 // Add Entry
 NanoCapTable.prototype.add = function(name, username, shares) {
     if (shares <= 0) {
@@ -54,6 +21,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     }
 
     if (this.table.some(entry => entry.username === username) || username === "") {
+        console.log(this.table)
         alert("Username Already Exists");
         return false;
     }
@@ -63,7 +31,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     // Push new entry
     this.table.push({"timestamp": timestamp, "name": name, "username": username, "shares": shares});
 
-    this.saveToLocalStorage();
+    //this.saveToLocalStorage();
     this.renderTable();
 
     return true;

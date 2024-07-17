@@ -66,6 +66,7 @@ async function saveToGitHub() {
                 sha: sha,
             }, null, 2)
         });
+        
         alert('File updated successfully');
     } catch (error) {
         console.log(error)
