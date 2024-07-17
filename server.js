@@ -4,7 +4,6 @@ const GITHUB_API_URL = 'https://api.github.com';
 const GITHUB_REPO = 'PubInv/nano-cap-table';
 const GITHUB_FILE_PATH = 'cap_table.json';
 
-var global_capTable;
 
 // Update page details function that sets repository link and table name
 function updatePageDetails(name) {
@@ -38,7 +37,7 @@ async function fetchFromGitHub() {
 }
 
 // Save cap_table.json to GitHub
-async function saveToGitHub() {
+async function saveToGitHub(capTable) {
    // const capTable = NanoCapTable.loadFromLocalStorage();
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(capTable))));
     const message = 'Update cap table';
