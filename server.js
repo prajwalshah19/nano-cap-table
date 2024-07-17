@@ -26,8 +26,6 @@ async function fetchFromGitHub() {
         }
         const data = await response.text();
         console.log("data", data)
- //       localStorage.setItem('capTable', data);
- //       const capTable = NanoCapTable.loadFromLocalStorage();
         capTable.renderTable();
         console.log(capTable)
         //updatePageDetails(capTable.name);
