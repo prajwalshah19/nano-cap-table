@@ -93,7 +93,14 @@
     <script>
         let capTable; // this is of typoe NanoCapTable
  //       = NanoCapTable.loadFromLocalStorage();
-        capTable = fetchFromGitHub();
+        capTablePromise = fetchFromGitHub();
+        capTable.then((value) => {
+              console.log(value);
+                capTable = value;
+                value.renderTable();
+            console.log("success!");
+  // Expected output: "Success!"    
+});
         console.log("The next object had bette be a NanoCapTable");
         console.log(capTable);
         function persistCapTable() {
