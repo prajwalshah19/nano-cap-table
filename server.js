@@ -23,6 +23,7 @@ async function fetchFromGitHub() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.text();
+        console.log("data", data)
         localStorage.setItem('capTable', data);
         const capTable = NanoCapTable.loadFromLocalStorage();
         capTable.renderTable();
@@ -51,10 +52,15 @@ async function saveToGitHub() {
                 'Accept': 'application/vnd.github.v3+json'
             }
         });
+    
+        if (!response.ok) {
+            throw new Error(`Failed to fetch file details: ${response.statusText}`);
+        }
+    
         const data = await response.json();
         const sha = data.sha;
-
-        await fetch(`${GITHUB_API_URL}/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`, {
+    
+        const updateResponse = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `token ${GITHUB_TOKEN}`,
@@ -66,10 +72,15 @@ async function saveToGitHub() {
                 sha: sha,
             }, null, 2)
         });
-        
+    
+        if (!updateResponse.ok) {
+            throw new Error(`Failed to update file: ${updateResponse.statusText}`);
+        }
+    
         alert('File updated successfully');
     } catch (error) {
-        console.log(error)
-        alert('Error saving to GitHub:', error);
+        console.error(error);
+        alert(`Error saving to GitHub: ${error.message}`);
     }
+    
 }

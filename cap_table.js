@@ -31,7 +31,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     // Push new entry
     this.table.push({"timestamp": timestamp, "name": name, "username": username, "shares": shares});
 
-    //this.saveToLocalStorage();
+    this.saveToLocalStorage();
     this.renderTable();
 
     return true;
@@ -88,6 +88,4 @@ NanoCapTable.loadFromLocalStorage = function() {
 }
 
 
-
-// Initialize and load data from GitHub
-fetchFromGitHub();
+fetchFromGitHub()
