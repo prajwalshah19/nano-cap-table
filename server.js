@@ -25,8 +25,10 @@ async function fetchFromGitHub() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.text();
-        console.log("data", data)
-        capTable.renderTable();
+        const obj = JSON.parse(data);
+        const capTable = new NanoCapTable(obj.name);
+        capTable.table = obj.table;
+        console.log("data", data);
         console.log(capTable)
         //updatePageDetails(capTable.name);
         return capTable;
