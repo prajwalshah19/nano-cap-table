@@ -8,7 +8,6 @@ const GITHUB_FILE_PATH = 'cap_table.json';
 // Update page details function that sets repository link and table name
 function updatePageDetails(name) {
     document.getElementById('pageTitle').textContent = name + " - Nano Cap Table";
-    document.getElementById('tableName').textContent = name;
     document.getElementById('repoLink').setAttribute('href', `https://github.com/${GITHUB_REPO}`);
     document.getElementById('repoLink').textContent = `Visit ${name}`;
 }
@@ -29,7 +28,7 @@ async function fetchFromGitHub() {
         capTable.table = obj.table;
         console.log("data", data);
         console.log(capTable)
-        //updatePageDetails(capTable.name);
+        updatePageDetails(capTable.name);
         return capTable;
     } catch (error) {
         console.error('Error fetching from GitHub:', error);

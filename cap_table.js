@@ -57,7 +57,8 @@ NanoCapTable.prototype.renderTable = function() {
         const ownership = (entry.shares / totalShares * 100).toFixed(2) + '%';
 
         // Include timestamp, name, username, shares, and calculated ownership
-        let data = [entry.timestamp.toLocaleString(), entry.name, entry.username, entry.shares, ownership];
+        let data = [new Date(Date.parse(entry.timestamp)).toLocaleString(), entry.name, entry.username, entry.shares, ownership];
+        console.log(typeof data[0]);
         data.forEach(value => {
             const cell = document.createElement("td");
             cell.textContent = value;
