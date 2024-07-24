@@ -1,7 +1,7 @@
 // Not a traditional server, these functions just provide a way to save current session to github
 
 const GITHUB_API_URL = 'https://api.github.com';
-const GITHUB_REPO = 'PubInv/nano-cap-table';
+const GITHUB_REPO = 'PubInv/nano-cap-table'; // make these env variables
 const GITHUB_FILE_PATH = 'cap_table.json';
 
 
@@ -37,14 +37,12 @@ async function fetchFromGitHub() {
 
 // Save cap_table.json to GitHub
 async function saveToGitHub(capTable) {
-   // const capTable = NanoCapTable.loadFromLocalStorage();
+
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(capTable))));
     const message = 'Update cap table';
-    let GITHUB_TOKEN = ''
-    if (GITHUB_TOKEN === '') {
-        //alert('Token Invalid')
-        GITHUB_TOKEN = window.prompt('Enter a valid github token here')
-    }
+
+    GITHUB_TOKEN = window.prompt('Enter a valid github token here')
+
     try {
         const response = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`, {
             headers: {

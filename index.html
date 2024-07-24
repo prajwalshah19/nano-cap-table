@@ -1,163 +1,188 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Nano Cap Table</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Nan Cap Table">
-    <meta name="author" content="Robert L. Read and Prajwal Shah">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="icon" href="./images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Nano Cap Table" />
+    <meta name="author" content="Robert L. Read and Prajwal Shah" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="icon" href="./images/favicon.ico" />
     <style>
-        html, body {
-            min-height: 100%;
-            overflow-y: auto; /* Allows scrolling */
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
+      html,
+      body {
+        min-height: 100%;
+        overflow-y: auto; /* Allows scrolling */
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+      }
 
-        body {
-            display: flex;
-            flex-direction: column; /* Stacks content vertically */
-        }
+      body {
+        display: flex;
+        flex-direction: column; /* Stacks content vertically */
+      }
 
-        .container {
-            flex: 1; /* Allows the container to expand */
-            padding-top: 20px;
-        }
+      .container {
+        flex: 1; /* Allows the container to expand */
+        padding-top: 20px;
+      }
 
-        footer {
-            background-color: #f0f0f0;
-            color: #636363;
-            text-align: center;
-            padding: 10px 5px 5px 0;
-        }
-        .json-output {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        #copyButton {
-            margin-top: 10px;
-        }
-        #json-data {
-            max-height: 400px; 
-            overflow: auto; 
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
+      footer {
+        background-color: #f0f0f0;
+        color: #636363;
+        text-align: center;
+        padding: 10px 5px 5px 0;
+      }
+      .json-output {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      #copyButton {
+        margin-top: 10px;
+      }
+      #json-data {
+        max-height: 400px;
+        overflow: auto;
+        background-color: #f4f4f4;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1 id = "pageTitle" class="display-4">Nano Cap Table</h1>
-        <p class="lead">A lightweight accounting of a capital table needed to create a simple joint stock company.</p>
-        <p><a id="repoLink" href="#" target="_blank">GitHub Repository</a></p>
-        <div class="mb-3">
-            <button class="btn btn-primary" onclick="showForm('insert')">Insert Entry</button>
-            <button class="btn btn-success" onclick="persistCapTable()">Save to GitHub</button>
-        </div>
-
-        <table class="table table-striped" id="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Shares</th>
-                    <th>Ownership</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <div class="form-container" style="display:none;" id="form-container">
-            <form id="entry-form" onsubmit="handleSubmit(event)">
-                <div id="form-fields"></div>
-                <button type="submit" class="btn btn-info">Submit</button>
-                <button type="button" class="btn btn-warning" onclick="hideForm()">Cancel</button>
-            </form>
-        </div>
-        <div class="json-output">
-          <h6>Output JSON file, copy and push this in github.</h6>
-          <pre id="json-data" class="bg-light p-2"><code></code></pre>
-          <button class="btn btn-primary" id="copyButton">Copy JSON</button>
+      <h1 id="pageTitle" class="display-4">Nano Cap Table</h1>
+      <p class="lead">
+        A lightweight accounting of a capital table needed to create a simple
+        joint stock company.
+      </p>
+      <p><a id="repoLink" href="#" target="_blank">GitHub Repository</a></p>
+      <div class="mb-3">
+        <button class="btn btn-primary" onclick="showForm()">
+          Insert Entry
+        </button>
+        <button class="btn btn-success" onclick="persistCapTable()">
+          Save to GitHub
+        </button>
       </div>
-      
+
+      <table class="table table-striped" id="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Timestamp</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Shares</th>
+            <th>Ownership</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="form-container" style="display: none" id="form-container">
+        <form id="entry-form" onsubmit="handleSubmit(event)">
+          <div id="form-fields"></div>
+          <button type="submit" class="btn btn-info">Add Record</button>
+          <button type="button" class="btn btn-warning" onclick="hideForm()">
+            Cancel
+          </button>
+        </form>
+      </div>
+      <div class="json-output">
+        <h6>Output JSON file, copy and push this in github.</h6>
+        <pre id="json-data" class="bg-light p-2"><code></code></pre>
+        <button class="btn btn-primary" id="copyButton" onclick="copyJSON()">
+          Copy JSON
+        </button>
+      </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="server.js"></script>
-    <script src="cap_table.js"></script>
-    <script>
-        let capTable; // this is of typoe NanoCapTable
- //       = NanoCapTable.loadFromLocalStorage();
-        capTablePromise = fetchFromGitHub();
-        capTablePromise.then((value) => {
-              console.log(value);
-                capTable = value;
-                value.renderTable();
-            console.log("success!");
-  // Expected output: "Success!"    
-});
-        console.log("The next object had bette be a NanoCapTable");
-        console.log(capTable);
-        function persistCapTable() {
-            saveToGitHub(capTable);
-        }
-        function showForm(action) {
-            const formContainer = document.getElementById('form-container');
-            const formFields = document.getElementById('form-fields');
-            formFields.innerHTML = '';
-
-            let fields = '';
-            fields += '<div class="form-group"><label for="name">Name:</label><input type="text" class="form-control" id="name" required></div>';
-            fields += '<div class="form-group"><label for="username">Username:</label><input type="text" class="form-control" id="username" required></div>';
-            fields += '<div class="form-group"><label for="shares">Shares:</label><input type="number" class="form-control" id="shares" required></div>';
-
-
-            formFields.innerHTML = fields;
-            formContainer.style.display = 'block';
-            formContainer.dataset.action = action;
-        }
-
-        function hideForm() {
-            const formContainer = document.getElementById('form-container');
-            formContainer.style.display = 'none';
-        }
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            const action = document.getElementById('form-container').dataset.action;
-            const name = document.getElementById('name') ? document.getElementById('name').value : null;
-            const username = document.getElementById('username').value;
-            const shares = document.getElementById('shares') ? parseInt(document.getElementById('shares').value, 10) : null;
-
-            if (action === 'insert') {
-                capTable.add(name, username, shares);
-            } 
-
-            hideForm();
-            capTable.renderTable();
-        }
-
-        // functionality for copy button to work
-        document.getElementById('copyButton').addEventListener('click', function() {
-            const jsonText = document.getElementById('json-data').innerText;
-            navigator.clipboard.writeText(jsonText).then(function() {
-                console.log('Copying to clipboard was successful!');
-                alert('Copied to clipboard!');
-            }, function(err) {
-                console.error('Could not copy text: ', err);
-            });
-        });
-        
-    </script>
-</body>
-<footer>
-  <p>All of the code on this site is released under the <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License Version 2</a>. View code and documentation <a href="https://github.com/PubInv/nano-cap-table">here</a>.</p>
-  <p>To assist on this project, contact Robert L. Read: <a href="mailto:read.robert@gmail.com">read.robert@gmail.com</a></p>
-
-</footer>
+    <footer>
+      <p>
+        All of the code on this site is released under the
+        <a href="https://www.gnu.org/licenses/agpl-3.0.html"
+          >GNU Affero General Public License Version 2</a
+        >. View code and documentation
+        <a href="https://github.com/PubInv/nano-cap-table">here</a>.
+      </p>
+      <p>
+        To assist on this project, contact Robert L. Read:
+        <a href="mailto:read.robert@gmail.com">read.robert@gmail.com</a>
+      </p>
+    </footer>
+  </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="server.js"></script>
+<script src="cap_table.js"></script>
+<script>
+  let capTable; // this is of typoe NanoCapTable
+  capTablePromise = fetchFromGitHub();
+  capTablePromise.then((value) => {
+    console.log(value);
+    capTable = value;
+    value.renderTable();
+    console.log("success!");
+    // Expected output: "Success!"
+  });
+  //console.log("The next object had bette be a NanoCapTable");
+  //console.log(capTable);
+  function persistCapTable() {
+    saveToGitHub(capTable);
+  }
+  function showForm() {
+    const formContainer = document.getElementById("form-container");
+    const formFields = document.getElementById("form-fields");
+    formFields.innerHTML = "";
+
+    let fields = "";
+    fields +=
+      '<div class="form-group"><label for="name">Name:</label><input type="text" class="form-control" id="name" required></div>';
+    fields +=
+      '<div class="form-group"><label for="username">Username:</label><input type="text" class="form-control" id="username" required></div>';
+    fields +=
+      '<div class="form-group"><label for="shares">Shares:</label><input type="number" class="form-control" id="shares" required></div>';
+
+    formFields.innerHTML = fields;
+    formContainer.style.display = "block";
+  }
+
+  function hideForm() {
+    const formContainer = document.getElementById("form-container");
+    formContainer.style.display = "none";
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById("name") // look at jquery implementation
+      ? document.getElementById("name").value
+      : null;
+    const username = document.getElementById("username").value;
+    const shares = document.getElementById("shares")
+      ? parseInt(document.getElementById("shares").value, 10)
+      : null;
+
+    capTable.add(name, username, shares);
+
+    hideForm();
+    capTable.renderTable();
+  }
+
+  // functionality for copy button to work
+  function copyJSON() {
+    const jsonText = document.getElementById("json-data").innerText;
+    navigator.clipboard.writeText(jsonText).then(
+      function () {
+        console.log("Copying to clipboard was successful!");
+        alert("Copied to clipboard!");
+      },
+      function (err) {
+        console.error("Could not copy text: ", err);
+      }
+    );
+  }
+</script>

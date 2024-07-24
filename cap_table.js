@@ -2,8 +2,6 @@
 // Constructor
 function NanoCapTable(name) {
     this.name = name;
- //   this.dateCreated = new Date(); // Create new date only if brand new cap_table. Represents date of first entry.
-    // May have to change constructor to accomplish that.
     this.table = [];
 }
 
@@ -35,7 +33,6 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     // Push new entry
     this.table.push({"timestamp": timestamp, "name": name, "username": username, "shares": shares});
 
-//    this.saveToLocalStorage();
     this.renderTable();
 
     return true;
@@ -45,7 +42,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
 
 // Render Table on Website
 NanoCapTable.prototype.renderTable = function() {
-    const tableElement = document.getElementById("table").getElementsByTagName('tbody')[0];
+    const tableElement = document.getElementById("table").getElementsByTagName('tbody')[0]; // fragile
     tableElement.innerHTML = ""; 
 
     const totalShares = this.totalShares; 
@@ -71,27 +68,5 @@ NanoCapTable.prototype.renderTable = function() {
     // Update JSON display
     document.getElementById("json-data").textContent = JSON.stringify(this, null, 2);
 }
-
-/*
-// Save to local storage
-NanoCapTable.prototype.saveToLocalStorage = function() {
-    localStorage.setItem('capTable', JSON.stringify(this));
-}
-
-// Load from Local Storage
-NanoCapTable.loadFromLocalStorage = function() {
-    const json = localStorage.getItem('capTable');
-    if (json) {
-        const obj = JSON.parse(json);
-        const capTable = new NanoCapTable(obj.name);
-        capTable.dateCreated = new Date(obj.dateCreated);
-        capTable.table = obj.table;
-        capTable.renderTable();
-        //updatePageDetails(capTable.name);
-        return capTable;
-    }
-    return new NanoCapTable("Example Table");
-}
-*/
 
 fetchFromGitHub()
