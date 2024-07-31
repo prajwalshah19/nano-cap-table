@@ -84,7 +84,20 @@
       </table>
       <div class="form-container" style="display: none" id="form-container">
         <form id="entry-form" onsubmit="handleSubmit(event)">
-          <div id="form-fields"></div>
+          <div id="form-fields">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="username">Username:</label
+              ><input type="text" class="form-control" id="username" required />
+            </div>
+            <div class="form-group">
+              <label for="shares">Shares:</label
+              ><input type="number" class="form-control" id="shares" required />
+            </div>
+          </div>
           <button type="submit" class="btn btn-info">Add Record</button>
           <button type="button" class="btn btn-warning" onclick="hideForm()">
             Cancel
@@ -124,37 +137,23 @@
   let capTable; // this is of typoe NanoCapTable
   capTablePromise = fetchFromGitHub();
   capTablePromise.then((value) => {
-    log(value);
+    console.debug(value);
     capTable = value;
     //value.renderTable();
     renderTable(value);
-    if (DEBUG_LEVEL <= 0) log('success!');
     // Expected output: "Success!"
   });
-  //log("The next object had bette be a NanoCapTable");
-  //log(capTable);
+  //console.debug("The next object had bette be a NanoCapTable");
+  //console.debug(capTable);
   function persistCapTable() {
     saveToGitHub(capTable);
   }
+
   function showForm() {
-    const $formContainer = $("#form-container");
-    const $formFields = $("#form-fields");
-    $formFields.empty();
-
-    let fields = "";
-    fields +=
-      '<div class="form-group"><label for="name">Name:</label><input type="text" class="form-control" id="name" required></div>';
-    fields +=
-      '<div class="form-group"><label for="username">Username:</label><input type="text" class="form-control" id="username" required></div>';
-    fields +=
-      '<div class="form-group"><label for="shares">Shares:</label><input type="number" class="form-control" id="shares" required></div>';
-
-    $formFields.html(fields);
-    $formContainer.show();
-}
+    $("#form-container").show();
+  }
 
   function hideForm() {
-    const $formContainer = $("form-container");
     $("#form-container").hide();
   }
 
@@ -167,54 +166,53 @@
     capTable.add(name, username, shares);
 
     hideForm();
-    //capTable.renderTable();
     renderTable(capTable);
-}
+  }
 
   // functionality for copy button to work
   function copyJSON() {
     const jsonText = $("#json-data").text();
     navigator.clipboard.writeText(jsonText).then(
       function () {
-        log(DEBUG_LEVEL <= 0 && "Copying to clipboard was successful!");
+        console.debug("Copying to clipboard was successful!");
         alert("Copied to clipboard!");
       },
       function (err) {
-        console.error(DEBUG_LEVEL <= 0 && "Could not copy text: ", err);
+        console.error("Could not copy text: ", err);
       }
     );
-}
+  }
 
-function renderTable(capTable) {
-  const $tableElement = $("#table tbody"); // less fragile
-  $tableElement.empty();
+  function renderTable(capTable) {
+    const $tableElement = $("#table tbody"); // less fragile
+    $tableElement.empty();
 
-  const totalShares = capTable.totalShares;
+    const totalShares = capTable.totalShares;
 
-  capTable.table.forEach((entry) => {
-    const $row = $("<tr>");
+    capTable.table.forEach((entry) => {
+      const $row = $("<tr>");
 
-    // Calculate ownership for current entry
-    const ownership = ((entry.shares / totalShares) * 100).toFixed(2) + "%";
+      // Calculate ownership for current entry
+      const ownership = ((entry.shares / totalShares) * 100).toFixed(2) + "%";
 
-    // Include timestamp, name, username, shares, and calculated ownership
-    const data = [
-      new Date(Date.parse(entry.timestamp)).toLocaleString(),
-      entry.name,
-      entry.username,
-      entry.shares,
-      ownership,
-    ];
-    log(DEBUG_LEVEL <= 0 && typeof data[0]);
-    $.each(data, (index, value) => {
-      const $cell = $("<td>").text(value);
-      $row.append($cell);
+      // Include timestamp, name, username, shares, and calculated ownership
+      const data = [
+        new Date(Date.parse(entry.timestamp)).toLocaleString(),
+        entry.name,
+        entry.username,
+        entry.shares,
+        ownership,
+      ];
+      console.debug(typeof data[0]);
+      $.each(data, (index, value) => {
+        const $cell = $("<td>").text(value);
+        $row.append($cell);
+      });
+
+      $tableElement.append($row);
     });
 
-    $tableElement.append($row);
-  });
-
-  // Update JSON display
-  $("#json-data").text(JSON.stringify(capTable, null, 2));
-}
+    // Update JSON display
+    $("#json-data").text(JSON.stringify(capTable, null, 2));
+  }
 </script>

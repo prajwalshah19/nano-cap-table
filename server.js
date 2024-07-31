@@ -1,13 +1,14 @@
 // Not a traditional server, these functions just provide a way to save current session to github
-const DEBUG_LEVEL = 1;
+//const DEBUG_LEVEL = 1;
 const GITHUB_API_URL = "https://api.github.com";
 const GITHUB_REPO = "PubInv/nano-cap-table"; // make these env variables
 const GITHUB_FILE_PATH = "cap_table.json";
 
-function log(message, level = 0) {
+/**
+function console.debug(message, level = 0) {
 	if (DEBUG_LEVEL <= level) console.trace(message);
-  }
-  
+}
+*/
 // Update page details function that sets repository link and table name
 function updatePageDetails(name) {
 	$("#pageTitle").text(name + " - Nano Cap Table");
@@ -30,8 +31,8 @@ async function fetchFromGitHub() {
     const obj = JSON.parse(data);
     const capTable = new NanoCapTable(obj.name);
     capTable.table = obj.table;
-    log("data", data);
-    log(capTable);
+    console.debug("data" + data);
+    console.debug(capTable);
     updatePageDetails(capTable.name);
     return capTable;
   } catch (error) {

@@ -21,7 +21,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     }
 
     if (this.table.some(entry => entry.username === username) || username === "") {
-        log(DEBUG_LEVEL <= 0 & this.table)
+        console.debug(DEBUG_LEVEL <= 0 & this.table)
         alert("Username Already Exists");
         return false;
     }
@@ -57,7 +57,7 @@ NanoCapTable.prototype.renderTable = function() {
 
         // Include timestamp, name, username, shares, and calculated ownership
         let data = [new Date(Date.parse(entry.timestamp)).toLocaleString(), entry.name, entry.username, entry.shares, ownership];
-        log(typeof data[0]);
+        console.debug(typeof data[0]);
         data.forEach(value => {
             const cell = document.createElement("td");
             cell.textContent = value;
