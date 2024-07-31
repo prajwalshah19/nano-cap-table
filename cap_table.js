@@ -21,7 +21,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     }
 
     if (this.table.some(entry => entry.username === username) || username === "") {
-        console.log(this.table)
+        log(DEBUG_LEVEL <= 0 & this.table)
         alert("Username Already Exists");
         return false;
     }
@@ -33,7 +33,7 @@ NanoCapTable.prototype.add = function(name, username, shares) {
     // Push new entry
     this.table.push({"timestamp": timestamp, "name": name, "username": username, "shares": shares});
 
-    this.renderTable();
+    //this.renderTable();
 
     return true;
 }
@@ -41,6 +41,8 @@ NanoCapTable.prototype.add = function(name, username, shares) {
 
 
 // Render Table on Website
+
+/** 
 NanoCapTable.prototype.renderTable = function() {
     const tableElement = document.getElementById("table").getElementsByTagName('tbody')[0]; // fragile
     tableElement.innerHTML = ""; 
@@ -55,7 +57,7 @@ NanoCapTable.prototype.renderTable = function() {
 
         // Include timestamp, name, username, shares, and calculated ownership
         let data = [new Date(Date.parse(entry.timestamp)).toLocaleString(), entry.name, entry.username, entry.shares, ownership];
-        console.log(typeof data[0]);
+        log(typeof data[0]);
         data.forEach(value => {
             const cell = document.createElement("td");
             cell.textContent = value;
@@ -68,5 +70,7 @@ NanoCapTable.prototype.renderTable = function() {
     // Update JSON display
     document.getElementById("json-data").textContent = JSON.stringify(this, null, 2);
 }
+
+*/
 
 fetchFromGitHub()

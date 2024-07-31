@@ -46,7 +46,7 @@ This project is developed in collaboration with Public Inventor, a non-profit or
 
 ## Usage
 
-*not done yet.*
+To use NanoCapTable, fork the latest release in your personal account or add it to your Github organization. 
 
 ## Conclusion
 
