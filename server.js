@@ -1,7 +1,7 @@
 // Not a traditional server, these functions just provide a way to save current session to github
 //const DEBUG_LEVEL = 1;
 const GITHUB_API_URL = "https://api.github.com";
-const GITHUB_REPO = "PubInv/nano-cap-table"; //CHANGE THIS to your github username
+const GITHUB_REPO = "prajwalshah19/nano-cap-table"; //CHANGE THIS to your github username
 const GITHUB_FILE_PATH = "cap_table.json";
 
 /**
