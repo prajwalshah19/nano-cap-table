@@ -1,29 +1,4 @@
 {
-  "name": "Public Invention",
-  "table": [
-    {
-      "timestamp": "2024-01-01T12:00:00.000Z",
-      "name": "Prajwal Shah",
-      "username": "pshah",
-      "shares": 1000
-    },
-    {
-      "timestamp": "2024-01-02T15:30:00.000Z",
-      "name": "Robert Read",
-      "username": "rread",
-      "shares": 1700
-    },
-    {
-      "timestamp": "2024-07-17T23:07:24.748Z",
-      "name": "Christina Cole",
-      "username": "ccole",
-      "shares": 1500
-    },
-    {
-      "timestamp": "2024-07-24T22:11:08.553Z",
-      "name": "Kilana Ocasio",
-      "username": "kocasio",
-      "shares": 2000
-    }
-  ]
+  "name": "Prajwal's Cap Table",
+
 }
